@@ -114,6 +114,35 @@ document.addEventListener('DOMContentLoaded', () => {
         btnPagar.disabled = !(cartaoValido && validadeValida && cvvValido && nomeValido);
     }
 
+    // 2.5 Carregar Cartões Salvos (Heurística #7 - Eficiência)
+    const usuarioLogado = JSON.parse(localStorage.getItem('sessao_ativa'));
+    let cartoesGlobais = JSON.parse(localStorage.getItem('cartoes_salvos')) || [];
+    let meusCartoes = usuarioLogado ? cartoesGlobais.filter(c => c.usuarioId === usuarioLogado.id) : [];
+
+    if (meusCartoes.length > 0) {
+        document.getElementById('saved-cards-container').style.display = 'block';
+        const select = document.getElementById('saved-cards-select');
+        meusCartoes.forEach((cartao, index) => {
+            const finalCartao = cartao.numero.substring(cartao.numero.length - 4);
+            const opt = document.createElement('option');
+            opt.value = index;
+            opt.textContent = `Cartão final ${finalCartao} (${cartao.nome})`;
+            select.appendChild(opt);
+        });
+
+        document.getElementById('btn-use-saved-card').addEventListener('click', () => {
+            const idx = select.value;
+            if (idx !== "") {
+                const cartao = meusCartoes[idx];
+                inputs.nome.value = cartao.nome;
+                inputs.cartao.value = cartao.numero;
+                inputs.validade.value = cartao.validade;
+                inputs.cvv.value = cartao.cvv;
+                validarFormulario();
+            }
+        });
+    }
+
     // 3. Simulação de Processamento (Heurística #1 - Visibilidade do status do sistema)
     function processarPagamento() {
         // Altera o estado do botão para visualização de carregamento
@@ -132,26 +161,53 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Simulação de Sucesso
-            // Gera um ID de compra único
             const idCompra = 'TKT-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+            const sessao = JSON.parse(localStorage.getItem('sessao_ativa'));
             
-            // Cria o objeto do ingresso comprado
             const novoIngresso = {
                 idCompra: idCompra,
                 eventoId: compraAtual.eventoId,
                 categoria: compraAtual.categoria,
                 assento: compraAtual.assento,
                 dataCompra: new Date().toISOString().split('T')[0],
-                qrCode: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==" 
+                qrCode: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==",
+                usuarioId: sessao ? sessao.id : null
             };
 
-            // Idealmente 'meusIngressos' do data.js deveria ser atualizado, mas como é um JS estático
-            // podemos simular salvando no localStorage para persistir na navegação, ou apenas seguir.
-            // Para efeitos de mock simples:
-            meusIngressos.push(novoIngresso);
+            // Atualiza ingressos globais
+            let ingressos_globais = JSON.parse(localStorage.getItem('ingressos_globais')) || [];
+            ingressos_globais.push(novoIngresso);
+            localStorage.setItem('ingressos_globais', JSON.stringify(ingressos_globais));
             
-            // Salvar no localStorage também para a próxima página ter acesso
+            // Atualiza assentos ocupados
+            let mapas_assentos_alterados = JSON.parse(localStorage.getItem('mapas_assentos_alterados')) || {};
+            if (!mapas_assentos_alterados[compraAtual.eventoId]) {
+                mapas_assentos_alterados[compraAtual.eventoId] = [];
+            }
+            if (!mapas_assentos_alterados[compraAtual.eventoId].includes(compraAtual.assento)) {
+                mapas_assentos_alterados[compraAtual.eventoId].push(compraAtual.assento);
+            }
+            localStorage.setItem('mapas_assentos_alterados', JSON.stringify(mapas_assentos_alterados));
+
+            // Salvar no localStorage temporário (opcional, mantendo compatibilidade)
             localStorage.setItem('ultimoIngressoComprado', JSON.stringify(novoIngresso));
+
+            // Salvar cartão para compras futuras (Heurística #7)
+            if (sessao) {
+                let cartoes = JSON.parse(localStorage.getItem('cartoes_salvos')) || [];
+                const cartaoAtual = inputs.cartao.value;
+                // Evita duplicar se já existir esse cartão salvo pro usuário
+                if (!cartoes.find(c => c.usuarioId === sessao.id && c.numero === cartaoAtual)) {
+                    cartoes.push({
+                        usuarioId: sessao.id,
+                        nome: inputs.nome.value,
+                        numero: cartaoAtual,
+                        validade: inputs.validade.value,
+                        cvv: inputs.cvv.value
+                    });
+                    localStorage.setItem('cartoes_salvos', JSON.stringify(cartoes));
+                }
+            }
 
             // Redirecionamento
             window.location.href = '/pages/perfil.html?success=true';

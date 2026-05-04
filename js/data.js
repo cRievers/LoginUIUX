@@ -1,6 +1,6 @@
 // js/data.js
 
-const eventos = [
+const eventosMock = [
     {
         id: 1,
         titulo: "Workshop de Sistemas de Informação (WSI)",
@@ -57,14 +57,53 @@ const eventos = [
     }
 ];
 
-// Ingressos comprados pelo usuário
-const meusIngressos = [
+const ingressosMock = [
     {
         idCompra: "ABC-123",
-        eventoId: 3, // Refere-se a um evento passado
+        eventoId: 3, 
         categoria: "Arquibancada",
         assento: "A1",
         dataCompra: "2025-09-15",
-        qrCode: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==" 
+        qrCode: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==",
+        usuarioId: "mock_user"
     }
 ];
+
+// Inicialização e Persistência
+
+let ingressos_globais = JSON.parse(localStorage.getItem('ingressos_globais'));
+if (!ingressos_globais) {
+    ingressos_globais = [...ingressosMock];
+    localStorage.setItem('ingressos_globais', JSON.stringify(ingressos_globais));
+}
+
+let mapas_assentos_alterados = JSON.parse(localStorage.getItem('mapas_assentos_alterados'));
+if (!mapas_assentos_alterados) {
+    mapas_assentos_alterados = {};
+    localStorage.setItem('mapas_assentos_alterados', JSON.stringify(mapas_assentos_alterados));
+}
+
+// Aplicar assentos ocupados
+const eventos = eventosMock.map(evento => {
+    const eventoAlterado = { ...evento, mapaAssentos: evento.mapaAssentos.map(fila => [...fila]) };
+    const ocupados = mapas_assentos_alterados[evento.id] || [];
+    
+    ocupados.forEach(label => {
+        // Encontrar a posição na matriz a partir do label (ex: "A1")
+        const rowIndex = label.charCodeAt(0) - 65; // 'A' é 65
+        const colIndex = parseInt(label.substring(1)) - 1;
+        
+        if (eventoAlterado.mapaAssentos[rowIndex] !== undefined && eventoAlterado.mapaAssentos[rowIndex][colIndex] !== undefined) {
+            eventoAlterado.mapaAssentos[rowIndex][colIndex] = false; // ocupado
+        }
+    });
+    
+    return eventoAlterado;
+});
+
+// Meus Ingressos da sessão atual
+const usuarioLogado = JSON.parse(localStorage.getItem('sessao_ativa'));
+let meusIngressos = [];
+if (usuarioLogado) {
+    meusIngressos = ingressos_globais.filter(i => i.usuarioId === usuarioLogado.id);
+}

@@ -2,6 +2,17 @@
 
 Aqui estão listados todos os passos implementados e o que ainda falta fazer, baseado no plano definido em `implementationPlan.md`. Isso garante que nenhuma heurística de usabilidade ou regra de negócio passe despercebida.
 
+## ✅ Milestone 0: Autenticação e Persistência
+**Status:** CONCLUÍDO
+
+- [x] Criar `js/auth.js` com funções de login, cadastro, logout e proteção de rotas.
+- [x] Refatorar `js/data.js` para usar `localStorage` (usuários, sessão, ingressos e mapas de assentos).
+- [x] Criar `pages/login.html`, `pages/cadastro.html` e `pages/recuperar-senha.html`.
+- [x] Atualizar páginas para verificar autenticação e preencher cabeçalhos.
+- [x] Integrar fluxo de checkout e mapa de assentos para persistir os dados no Storage.
+
+---
+
 ## ✅ Milestone 1: Fundação, Estilo e Dados (Core)
 **Status:** CONCLUÍDO
 
