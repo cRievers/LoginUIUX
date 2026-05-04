@@ -240,3 +240,85 @@
 @keyframes spin {
     to { transform: rotate(360deg); }
 }
+
+/* Tabs de Navegação (Milestone 5) */
+.tabs {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--outline);
+    overflow-x: auto;
+}
+
+.tab-btn {
+    background: transparent;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1rem;
+    color: var(--secondary);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.tab-btn.active {
+    color: var(--primary);
+    border-bottom: 2px solid var(--primary);
+    font-weight: 500;
+}
+
+/* Card de Ingresso (Milestone 5) */
+.tickets-container {
+    display: grid;
+    gap: 16px;
+    /* Grid responsivo (RNF02) */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+}
+
+.ticket-card {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    border-left: 6px solid var(--primary);
+    box-shadow: var(--shadow-1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.ticket-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-2);
+}
+
+.ticket-card.past-event {
+    border-left-color: var(--outline);
+    opacity: 0.7;
+    filter: grayscale(0.5);
+}
+
+.ticket-info {
+    flex: 1;
+}
+
+.ticket-info h4 { margin-bottom: 8px; color: #1C1B1F; font-size: 1.1rem; }
+.ticket-info p { margin-bottom: 4px; font-size: 0.875rem; color: var(--secondary); }
+
+.ticket-qr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-left: 16px;
+    border-left: 1px dashed var(--outline);
+    margin-left: 16px;
+}
+
+.ticket-qr img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 4px;
+}
+

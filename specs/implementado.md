@@ -46,10 +46,10 @@ Aqui estão listados todos os passos implementados e o que ainda falta fazer, ba
 
 ---
 
-## ⏳ Milestone 5: Pós-Venda e Ingresso Digital (Perfil)
-**Status:** PENDENTE
+## ✅ Milestone 5: Pós-Venda e Ingresso Digital (Perfil)
+**Status:** CONCLUÍDO
 
-- [ ] Desenvolver `pages/perfil.html` contendo um sistema de abas para exibir "Eventos Futuros" e "Histórico/Passados".
-- [ ] Construir lógica de ordenação cronológica dos ingressos do usuário baseada em `data.js`.
-- [ ] Interface final do "Ingresso Digital", garantindo a renderização visual do QR Code.
-- [ ] **Heurísticas Foco:** *Flexibilidade e Eficiência de Uso (#7)*.
+- [x] Desenvolver `pages/perfil.html` contendo um sistema de abas para exibir "Eventos Futuros" e "Histórico/Passados".
+- [x] Construir lógica de ordenação cronológica dos ingressos do usuário baseada em `data.js`.
+- [x] Interface final do "Ingresso Digital", garantindo a renderização visual do QR Code.
+- [x] **Heurísticas Foco:** *Flexibilidade e Eficiência de Uso (#7)*.
