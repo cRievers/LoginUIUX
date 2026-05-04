@@ -169,3 +169,57 @@
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+/* Seat Styles (Milestone 3) */
+.seat {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px 8px 4px 4px; /* Formato que lembra uma poltrona */
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.seat.available {
+    background-color: var(--primary-container);
+    border: 1px solid var(--primary);
+    color: var(--primary);
+}
+
+.seat.occupied {
+    background-color: var(--outline);
+    cursor: not-allowed; /* Prevenção de erros (#5) */
+    opacity: 0.5;
+    color: white;
+}
+
+.seat.selected {
+    background-color: var(--primary);
+    color: white;
+    transform: scale(1.1);
+    box-shadow: var(--shadow-2);
+}
+
+.seat.corredor {
+    visibility: hidden; /* Espaço vazio para simular corredores (#2) */
+}
+
+.legend {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.875rem;
+    color: var(--secondary);
+}

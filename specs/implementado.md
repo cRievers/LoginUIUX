@@ -25,14 +25,14 @@ Aqui estão listados todos os passos implementados e o que ainda falta fazer, ba
 
 ---
 
-## ⏳ Milestone 3: O Coração do IHC (Mapa de Assentos)
-**Status:** PENDENTE
+## ✅ Milestone 3: O Coração do IHC (Mapa de Assentos)
+**Status:** CONCLUÍDO
 
-- [ ] Desenvolver `pages/evento.html` contendo os detalhes do evento e o container do mapa de assentos.
-- [ ] Implementar o gerador de grid dinâmico via JS que converte os arrays em interface visual (interpretação do `null` para corredores).
-- [ ] Inserir lógica de seleção de assento com feedback visual imediato ("selecionado", "livre", "ocupado").
-- [ ] Atualizar o preço da compra em tempo real conforme a seleção do assento.
-- [ ] **Heurísticas Foco:** *Visibilidade do Status do Sistema (#1)* e *Correspondência com o Mundo Real (#2)*.
+- [x] Desenvolver `pages/evento.html` contendo os detalhes do evento e o container do mapa de assentos.
+- [x] Implementar o gerador de grid dinâmico via JS que converte os arrays em interface visual (interpretação do `null` para corredores).
+- [x] Inserir lógica de seleção de assento com feedback visual imediato ("selecionado", "livre", "ocupado").
+- [x] Atualizar o preço da compra em tempo real conforme a seleção do assento.
+- [x] **Heurísticas Foco:** *Visibilidade do Status do Sistema (#1)* (botões e estado claro), *Correspondência com o Mundo Real (#2)* (formato do mapa, cadeiras nomeadas como A1, B2) e *Prevenção de Erros (#5)* (impossibilidade de clicar em assento ocupado).
 
 ---
 
