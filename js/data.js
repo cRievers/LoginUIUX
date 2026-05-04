@@ -8,6 +8,7 @@ const eventos = [
         local: "Auditório Principal - IFMG",
         descricao: "Explorando as fronteiras da IHC e IA.",
         imagem: "assets/wsi.jpg",
+        categoria: "Acadêmico",
         categorias: [
             { id: "std", nome: "Normal", preco: 50.00 },
             { id: "vip", nome: "Área VIP", preco: 120.00 }
@@ -27,6 +28,7 @@ const eventos = [
         local: "Praça de Eventos",
         descricao: "Música, arte e gastronomia com artistas locais e atrações nacionais.",
         imagem: "assets/festival.jpg",
+        categoria: "Música",
         categorias: [
             { id: "std", nome: "Pista", preco: 80.00 },
             { id: "vip", nome: "Camarote", preco: 200.00 }
@@ -44,6 +46,7 @@ const eventos = [
         local: "Ginásio Poliesportivo",
         descricao: "A maior batalha de robôs da região. Venha torcer pela sua equipe favorita!",
         imagem: "assets/robotica.jpg",
+        categoria: "Robótica",
         categorias: [
             { id: "std", nome: "Arquibancada", preco: 20.00 }
         ],
