@@ -36,13 +36,13 @@ Aqui estão listados todos os passos implementados e o que ainda falta fazer, ba
 
 ---
 
-## ⏳ Milestone 4: Fluxo de Checkout e Simulação
-**Status:** PENDENTE
+## ✅ Milestone 4: Fluxo de Checkout e Simulação
+**Status:** CONCLUÍDO
 
-- [ ] Desenvolver `pages/checkout.html` trazendo o resumo do pedido (valores e assentos) das telas anteriores.
-- [ ] Desenvolver formulário de pagamento com máscaras de input visuais (Cartão, Validade, CVV) via JavaScript puro.
-- [ ] Criar simulação de transação com delay (`setTimeout`) e alteração de estados no botão ("Processando...", "Concluído").
-- [ ] **Heurísticas Foco:** *Prevenção de Erros (#5)* e *Ajuda na Recuperação de Erros (#9)*.
+- [x] Desenvolver `pages/checkout.html` trazendo o resumo do pedido (valores e assentos) das telas anteriores.
+- [x] Desenvolver formulário de pagamento com máscaras de input visuais (Cartão, Validade, CVV) via JavaScript puro.
+- [x] Criar simulação de transação com delay (`setTimeout`) e alteração de estados no botão ("Processando...", "Concluído").
+- [x] **Heurísticas Foco:** *Prevenção de Erros (#5)* e *Ajuda na Recuperação de Erros (#9)*.
 
 ---
 
